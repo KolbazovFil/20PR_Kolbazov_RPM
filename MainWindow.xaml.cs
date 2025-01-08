@@ -3,49 +3,86 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 namespace _20PR_Kolbazov_RPM
 {
     public partial class MainWindow : Window
     {
-        private void StartAnimation_Click(object sender, RoutedEventArgs e)
+        private DoubleAnimation ellipseAnimation;
+        private DoubleAnimation rectangleAnimation;
+        private ColorAnimation textAnimation;
+        public MainWindow()
         {
-            // Запускаем анимацию для каждого элемента
-            Storyboard circleStoryboard = (Storyboard)FindResource("CircleAnimation");
-            circleStoryboard.Begin();
-
-            Storyboard rectangleStoryboard = (Storyboard)FindResource("RectangleAnimation");
-            rectangleStoryboard.Begin();
-
-            Storyboard textStoryboard = (Storyboard)FindResource("TextAnimation");
-            textStoryboard.Begin();
+            InitializeComponent();
+            Animation();
         }
-
-        private void StopAnimation_Click(object sender, RoutedEventArgs e)
+        private void Animation()
         {
-            // Останавливаем анимацию для каждого элемента
-            Storyboard circleStoryboard = (Storyboard)FindResource("CircleAnimation");
-            circleStoryboard.Stop();
+            ellipseAnimation = new DoubleAnimation  // Анимация эллипса
+            {
+                From = 50,
+                To = 200,
+                Duration = TimeSpan.FromSeconds(2),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
 
-            Storyboard rectangleStoryboard = (Storyboard)FindResource("RectangleAnimation");
-            rectangleStoryboard.Stop();
+            rectangleAnimation = new DoubleAnimation    // Анимация прямоугольника
+            {
+                From = 0,
+                To = 300,
+                Duration = TimeSpan.FromSeconds(2),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
 
-            Storyboard textStoryboard = (Storyboard)FindResource("TextAnimation");
-            textStoryboard.Stop();
+            textAnimation = new ColorAnimation  // Анимация текста
+            {
+                From = Colors.Black,
+                To = Colors.Coral,
+                Duration = TimeSpan.FromSeconds(1),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            
+            Text.Foreground = new SolidColorBrush(Colors.Black);    // Установка начального цвета
         }
-
-        private void ResetAnimation_Click(object sender, RoutedEventArgs e)
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            // Возвращаем все элементы в начальное состояние
-            animatedCircle.Width = 100;
-            animatedCircle.Height = 100;
+            Ellipse.BeginAnimation(Ellipse.WidthProperty, ellipseAnimation);
+            Ellipse.BeginAnimation(Ellipse.HeightProperty, ellipseAnimation);
+            Rectangle.BeginAnimation(Canvas.LeftProperty, rectangleAnimation);
+            Text.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+        }
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            var ellipseWidth = Ellipse.Width;
+            var ellipseHeight = Ellipse.Height;
+            var rectangleLeft = Canvas.GetLeft(Rectangle);
+            var currentColor = ((SolidColorBrush)Text.Foreground).Color;
 
-            animatedRectangle.Width = 100;
-
-            animatedRectangle.Height = 100;
-
-            animatedText.Foreground = new SolidColorBrush(Colors.Red);
-
-            StopAnimation_Click(sender, e);
+            // Остановка анимации и установка текущих значений
+            Ellipse.BeginAnimation(Ellipse.WidthProperty, null);
+            Ellipse.Width = ellipseWidth;
+            Ellipse.BeginAnimation(Ellipse.HeightProperty, null);
+            Ellipse.Height = ellipseHeight;
+            Rectangle.BeginAnimation(Canvas.LeftProperty, null);
+            Canvas.SetLeft(Rectangle, rectangleLeft);
+            Text.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, null);
+            Text.Foreground = new SolidColorBrush(currentColor);
+        }
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Остановка анимаций
+            Ellipse.BeginAnimation(Ellipse.WidthProperty, null);
+            Ellipse.BeginAnimation(Ellipse.HeightProperty, null);
+            Rectangle.BeginAnimation(Canvas.LeftProperty, null);
+            Text.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, null);
+            // Сброс значений
+            Ellipse.Width = 50;
+            Ellipse.Height = 50;
+            Canvas.SetLeft(Rectangle, 150);
+            Text.Foreground = new SolidColorBrush(Colors.Black);
         }
     }
 }

@@ -5,15 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_20PR_Kolbazov_RPM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-        <Grid Background="White">
-        <Canvas>
-            <Ellipse x:Name="animatedCircle" Width="100" Height="100" Fill="Blue" Canvas.Left="50" Canvas.Top="50"/>
-            <Rectangle x:Name="animatedRectangle" Width="100" Height="100" Fill="Green" Canvas.Left="200" Canvas.Top="50"/>
-            <TextBlock x:Name="animatedText" Text="Hello WPF!" FontSize="30" Foreground="Red" Canvas.Left="350" Canvas.Top="50"/>
-            <Button Content="Start Animation" Click="StartAnimation_Click" Width="120" Height="30" Canvas.Left="50" Canvas.Top="200"/>
-            <Button Content="Stop Animation" Click="StopAnimation_Click" Width="120" Height="30" Canvas.Left="200" Canvas.Top="200"/>
-            <Button Content="Reset Animation" Click="ResetAnimation_Click" Width="120" Height="30" Canvas.Left="350" Canvas.Top="200"/>
+        Title="20PR_Kolbazov_RPM" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="150*"/>
+        </Grid.RowDefinitions>
+        <Canvas x:Name="animatedCanvas" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0">
+            <Ellipse x:Name="Ellipse" Fill="Blue" Width="50" Height="50" Canvas.Top="100" Canvas.Right="150"/>
+            <Rectangle x:Name="Rectangle" Fill="Red" Width="50" Height="50" Canvas.Top="100" Canvas.Left="150"/>
+            <TextBlock x:Name="Text" Text="Разработчик: Колбазов Филипп Дионисович группы 2озИСИП-1623" FontSize="24" Canvas.Top="30" Canvas.Right="-380"/>
         </Canvas>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Width="300">
+            <Button x:Name="startButton" Content="Старт" Click="StartButton_Click" Width="100" Height="30" FontSize="20" Background="teal" HorizontalAlignment="Left"/>
+            <Button x:Name="stopButton" Content="Стоп" Click="StopButton_Click" Width="100" Height="30" FontSize="20" Background="Teal" HorizontalAlignment="Center"/>
+            <Button x:Name="resetButton" Content="Сброс" Click="ResetButton_Click" Width="100" Height="30" FontSize="20" Background="Teal" HorizontalAlignment="Right"/>
+        </StackPanel>
     </Grid>
-    </Window>
+</Window>
