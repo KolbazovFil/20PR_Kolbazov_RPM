@@ -26,16 +26,14 @@ namespace _20PR_Kolbazov_RPM
                 AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever
             };
-
             rectangleAnimation = new DoubleAnimation    // Анимация прямоугольника
             {
-                From = 0,
+                From = 150,
                 To = 300,
                 Duration = TimeSpan.FromSeconds(2),
                 AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever
             };
-
             textAnimation = new ColorAnimation  // Анимация текста
             {
                 From = Colors.Black,

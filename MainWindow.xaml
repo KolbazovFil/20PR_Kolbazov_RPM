@@ -12,8 +12,8 @@
             <RowDefinition Height="150*"/>
         </Grid.RowDefinitions>
         <Canvas x:Name="animatedCanvas" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0">
-            <Ellipse x:Name="Ellipse" Fill="Blue" Width="50" Height="50" Canvas.Top="100" Canvas.Right="150"/>
-            <Rectangle x:Name="Rectangle" Fill="Red" Width="50" Height="50" Canvas.Top="100" Canvas.Left="150"/>
+            <Ellipse x:Name="Ellipse" Fill="Blue" Width="50" Height="50" Canvas.Top="100" Canvas.Right="150" StrokeThickness="5" StrokeDashArray="2 2" Stroke="Blue" StrokeDashCap="Triangle"/>
+            <Rectangle x:Name="Rectangle" Fill="Red" Width="50" Height="50" Canvas.Top="100" Canvas.Left="150" RadiusX="10" RadiusY="10"/>
             <TextBlock x:Name="Text" Text="Разработчик: Колбазов Филипп Дионисович группы 2озИСИП-1623" FontSize="24" Canvas.Top="30" Canvas.Right="-380"/>
         </Canvas>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Width="300">
